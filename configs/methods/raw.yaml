@@ -1,0 +1,3 @@
+id: raw
+name: Raw generator
+description: the commanded motion every chunk, no decision

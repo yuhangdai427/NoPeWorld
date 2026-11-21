@@ -1,0 +1,4 @@
+id: nopeworld_collision
+name: NoPeWorld, collision mode
+description: the head reads the first denoising forward of the current chunk and replaces an unsafe command
+head_mode: collision

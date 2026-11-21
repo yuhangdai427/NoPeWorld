@@ -1,0 +1,29 @@
+id: hy_nomas
+name: Hy-Nomas
+adapter: world_models.hy_nomas:HYNomasAdapter
+fps: 24
+packages: fps24              # Task 2: the 24 fps package of each route; Task 3: default/
+history_chunks: 0            # the start is the route's last history frames (at most 64, whole chunks) or the start image
+chunk_latents: 4
+token_grid: [22, 40]
+paths:                       # relative to NOPE_GENERATORS
+  code: hy_nomas/hy-nomas
+  weights: hy_nomas/weights
+  text_encoder: hy_worldplay/weights/runtime/text_encoder/llm
+generation: {}               # raw, text_prompt, external_depth: the repository's own camera feeding
+generation_by_method:        # merged over `generation` for these methods: the camera feeding the heads were trained under
+  nopeworld_collision: {metric_speed: 12.9, camera_shift: true}
+  nopeworld_prediction: {metric_speed: 12.9, camera_shift: true}
+training:
+  max_rounds: 12
+  max_steps: null
+  final_val_videos: 0
+  prefetch: 1
+  metric_speed: 12.9
+  camera_shift: true
+heads:
+  collision: {blocks: [33], state: step0, name: L33, missed_limit: 0.10}
+  prediction: {blocks: [33], state: commit, name: L33_commit, missed_limit: 0.10}
+external_depth:              # the decision rule of the external depth method (only KEEP and STOP are choosable)
+  offload: true
+  selection: {rule: safe_first, temperature: 0.906, tau: 0.7, keep_margin: 0.0}

@@ -1,0 +1,31 @@
+id: lingbot_world_2
+name: LingBot-World 2.0
+adapter: world_models.lingbot_world_2:LingBotWorld2Adapter
+fps: 16
+packages: fps16              # Task 2: the 16 fps package of each route; Task 3: lingbot_world_2/ (the full 8 s input)
+history_chunks: 4            # Task 2; a route whose hand-off leaves room for fewer runs with as many as fit; Task 3 starts from the image (0)
+chunk_latents: 3
+token_grid: [29, 52]
+paths:                       # relative to NOPE_GENERATORS
+  code: lingbot_world_2/code      # the LingBot-World 2.0 repository (commit a3bd3c96416c77b5a5431a92c14da3c7b30d4cc7): its wan/ package
+  weights: lingbot_world_2/weights  # the i2v-A14B checkpoint folder (transformers/ with the causal_fast DiT, T5, VAE)
+generation: {}
+training:                    # the settings the released heads were trained with
+  accumulate: 8
+  max_rounds: 12
+  max_steps: null
+  final_val_videos: 93
+  all_safe_keep: 0.333
+  skip_unused_probes: true
+  intent_head: true
+  rule: safe_first
+  tau: 0.8
+  keep_activations: true
+  hold_gpu_memory: true
+  save_val_preds: true
+  prefetch: 1
+heads:
+  collision: {blocks: [30, 38, 39], state: step0, name: L30+38+39_acc32_lr2, accumulate: 32, lr_scale: 2, missed_limit: 0.10}
+  prediction: {blocks: [30], state: commit, name: L30_commit, missed_limit: 0.10}
+external_depth:              # the decision rule of the external depth method (only KEEP and STOP are choosable); the collision head's operating point
+  selection: {rule: safe_first, temperature: 0.82, tau: 0.85, keep_margin: 0.03}

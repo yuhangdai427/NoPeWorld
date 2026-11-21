@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nopeworld"
+version = "1.0.0"
+description = "NoPeWorld: a safety head that reads a frozen video world model's DiT states and replaces unsafe motion commands; NoPeBench, its three-task benchmark."
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.10"
+dependencies = [
+    "numpy",
+    "torch",
+    "pyyaml",
+    "imageio-ffmpeg>=0.5.1",
+    "pillow",
+    "scipy",
+    "huggingface_hub",
+]
+
+[project.optional-dependencies]
+eval = ["opencv-python"]
+crops = ["opencv-python", "imageio-ffmpeg==0.6.0"]
+test = ["pytest"]
+
+[project.scripts]
+nopeworld-train = "nopeworld.cli:train_main"
+nopeworld-infer = "nopeworld.cli:infer_main"
+nopebench-eval = "nopebench.cli:eval_main"
+nopebench-download = "nopebench.cli:download_main"
+
+[tool.setuptools.packages.find]
+include = ["nopeworld*", "nopebench*", "world_models*"]
+
+[tool.setuptools.package-data]
+"*" = ["*.yaml", "*.json", "*.txt"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

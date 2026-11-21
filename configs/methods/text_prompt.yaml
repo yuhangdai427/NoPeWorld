@@ -1,0 +1,3 @@
+id: text_prompt
+name: Text prompt
+description: the route's own prompt, a space, then one sentence naming the obstacle ahead (text_prompts/ of the dataset)

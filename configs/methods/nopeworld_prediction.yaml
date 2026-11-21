@@ -1,0 +1,4 @@
+id: nopeworld_prediction
+name: NoPeWorld, prediction mode
+description: the head reads the commit pass of the previous chunk and decides before the chunk is generated
+head_mode: prediction

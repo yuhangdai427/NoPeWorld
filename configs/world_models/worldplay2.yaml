@@ -1,0 +1,24 @@
+id: worldplay2
+name: WorldPlay2
+adapter: world_models.worldplay2:WorldPlay2Adapter
+fps: 16
+packages: fps16
+history_chunks: 3            # Task 2; a route whose hand-off leaves room for fewer runs with as many as fit
+chunk_latents: 4
+token_grid: [28, 52]
+paths:                       # relative to NOPE_GENERATORS
+  code: worldplay2/code      # the WorldPlay2 repository (commit c5d83e32099116ff3a1437a8a05c764d579f704b)
+  weights: worldplay2/weights  # Wan2.2-I2V-A14B/ (T5, VAE, expert configs) and WorldPlay2-Fast/{high,low}_noise_model/
+generation: {}
+training:
+  max_rounds: 48
+  max_steps: 1000
+  final_val_videos: 30
+  frozen_states: true
+  prefetch: 1
+heads:
+  collision: {blocks: [30], state: step0, frozen: true, name: L30_frozen, missed_limit: 0.05}
+  prediction: {blocks: [20], state: commit, name: L20_commit, missed_limit: 0.05}
+external_depth:              # the decision rule of the external depth method (only KEEP and STOP are choosable)
+  selection: {rule: safe_first, temperature: 0.82, tau: 0.95, keep_margin: 0.075}
+  offload: true

@@ -1,0 +1,25 @@
+id: hy_worldplay
+name: HY-WorldPlay
+adapter: world_models.hy_worldplay:HYWorldPlayAdapter
+fps: 24
+packages: fps24              # Task 2: the 24 fps package of each route; Task 3: default/
+history_chunks: 3            # Task 2; Task 3 starts from the image (0)
+chunk_latents: 4
+token_grid: [30, 52]
+paths:                       # relative to NOPE_GENERATORS
+  code: hy_worldplay/HY-WorldPlay
+  weights: hy_worldplay/weights
+generation:
+  translation_scale: 0.4
+training:                    # trainer settings, then the adapter's replay flags
+  max_rounds: 48
+  max_steps: 1000
+  final_val_videos: 15
+  prefetch: 1
+  translation_scale: 0.4
+heads:
+  collision: {blocks: [27], state: step0, name: L27, missed_limit: 0.10}
+  prediction: {blocks: [33], state: commit, name: L33_commit, missed_limit: 0.10}
+external_depth:              # the decision rule of the external depth method (only KEEP and STOP are choosable)
+  offload: true
+  selection: {rule: safe_first, temperature: 1.0, tau: 0.8, keep_margin: 0.02}

@@ -1,0 +1,4 @@
+id: external_depth
+name: External depth (keep or stop)
+description: before each decided chunk DA3 depth on the decoded frames, scaled on the true history, sweeps the candidates; only KEEP and STOP can be chosen
+choices: [KEEP, STOP]

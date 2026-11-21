@@ -1,0 +1,21 @@
+id: evoke_turbo
+name: Evoke-Turbo
+adapter: world_models.evoke_turbo:EvokeTurboAdapter
+fps: 24
+packages: fps24
+history_chunks: 1
+chunk_latents: 9
+token_grid: [6, 10]
+paths:
+  code: evoke_turbo/code      # the Evoke repository (the folder that holds evoke/ and scripts/inference/)
+  weights: evoke_turbo/weights  # evoke-base/, evoke-turbo/, ViGeo1.1/
+generation: {}
+training:
+  max_rounds: 48
+  max_steps: 1000
+  final_val_videos: 15
+  prefetch: 1
+heads:
+  collision: {blocks: [20], state: step0, name: L20, missed_limit: 0.10}
+external_depth:               # the decision rule of the external depth method (only KEEP and STOP are choosable)
+  selection: {rule: safe_first, temperature: 0.906, tau: 0.8, keep_margin: 0.02}

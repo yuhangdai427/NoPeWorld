@@ -1,0 +1,26 @@
+id: echo_wm
+name: Echo-WM
+adapter: world_models.echo_wm:EchoWMAdapter
+fps: 24
+packages: fps24
+history_chunks: 2
+chunk_latents: 3
+token_grid: [22, 40]
+paths:
+  code: echo_wm/code          # the Echo-WM repository (the folder that holds ltx-core/, ltx-causal/, ltx-pipelines/, helpers/)
+  weights: echo_wm/weights    # echo-wm-flash.safetensors and gemma-3/
+generation:
+  intrinsics: constant        # Task 2 routes are rendered with the training camera
+generation_by_task:
+  task3: {intrinsics: package}   # open-domain images: the package's own camera
+training:
+  max_rounds: 48
+  max_steps: 1000
+  final_val_videos: 15
+  prefetch: 0                 # the whole-video encode does not fit next to the replay's caches on a 96 GB card
+heads:
+  collision: {blocks: [42], state: step0, name: L42, missed_limit: 0.05}
+  prediction: {blocks: [30], state: commit, name: L30_commit, missed_limit: 0.10}
+external_depth:               # the decision rule of the external depth method (only KEEP and STOP are choosable)
+  offload: true
+  selection: {rule: safe_first, temperature: 1.0, tau: 0.9, keep_margin: 0.02}
