@@ -5,7 +5,7 @@
 <h1 align="center">Non-penetrating World Models</h1>
 
 <p align="center">
-  Official implementation of the paper <b>Non-penetrating World Models</b>.<br>
+  Official implementation of the paper <a href="https://arxiv.org/abs/2611.27963"><b>Non-penetrating World Models</b></a>.<br>
   We introduce <b>NoPeWorld</b>, which teaches video world models to <b>say NoPe to obstacles</b>, and <b>NoPeBench</b>, a benchmark that tests whether they walk through walls.
 </p>
 
@@ -17,9 +17,8 @@
   <sub><sup>*</sup>Corresponding author</sub>
 </p>
 
-<!-- arXiv placeholder: replace ARXIV_ID (badge, link and BibTeX) once the identifier is assigned. -->
 <p align="center">
-  <a href="https://arxiv.org/abs/ARXIV_ID"><img src="https://img.shields.io/badge/arXiv-ARXIV__ID-b31b1b?logo=arxiv&logoColor=white" alt="arXiv"></a>
+  <a href="https://arxiv.org/abs/2611.27963"><img src="https://img.shields.io/badge/arXiv-2611.27963-b31b1b?logo=arxiv&logoColor=white" alt="arXiv"></a>
   <a href="https://nopeworld.github.io"><img src="https://img.shields.io/badge/Project-Page-2e8b4f" alt="Project page"></a>
   <a href="https://github.com/yuhangdai427/NoPeWorld"><img src="https://img.shields.io/badge/GitHub-Code-181717?logo=github" alt="Code"></a>
   <a href="https://huggingface.co/PeterDAI/NoPeWorld"><img src="https://img.shields.io/badge/Models-NoPeWorld-ffd21e?logo=huggingface&logoColor=black" alt="Models"></a>
@@ -36,7 +35,7 @@
 ## News
 
 - **2026-11-21**: Released the code, trained heads for six world models, and the NoPeBench dataset.
-- **2026-11-20**: Paper submitted to arXiv.
+- **2026-11-20**: Paper submitted to [arXiv](https://arxiv.org/abs/2611.27963).
 
 ## Highlights
 
@@ -177,9 +176,10 @@ Tasks, evaluators and metrics: [docs/BENCHMARK.md](docs/BENCHMARK.md). Archives 
   title         = {Non-penetrating World Models},
   author        = {Yuhang Dai and Yinwei Wu and Ziyue Lin and Han Ji and Xingyi Yang},
   year          = {2026},
-  eprint        = {ARXIV_ID},
+  eprint        = {2611.27963},
   archivePrefix = {arXiv},
-  primaryClass  = {cs.CV}
+  primaryClass  = {cs.CV},
+  url           = {https://arxiv.org/abs/2611.27963}
 }
 ```
 
